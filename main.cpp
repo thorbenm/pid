@@ -4,7 +4,7 @@
 double goal = 1;
 double value = 0;
 
-pid control(1,0.5,0.25);
+pid control(.1,.1,.1);
 
 int main(void){
 	control.set_value(value);
@@ -12,13 +12,25 @@ int main(void){
 	int time = 0;
 
 	std::cout << time++ << "\t" << goal << "\t" << value << std::endl;
-	for(int j = 0; j<20;j++){
+	for(int j = 0; j<200;j++){
 		value = control.update(value);
 		std::cout << time++ << "\t" << goal << "\t" << value << std::endl;
 	}
 	goal = 2;
 	control.set_goal(goal);
-	for(int j = 0; j<20;j++){
+	for(int j = 0; j<200;j++){
+		value = control.update(value);
+		std::cout << time++ << "\t" << goal << "\t" << value << std::endl;
+	}
+	goal = 0;
+	control.set_goal(goal);
+	for(int j = 0; j<200;j++){
+		value = control.update(value);
+		std::cout << time++ << "\t" << goal << "\t" << value << std::endl;
+	}
+	for(int j = 0; j<200;j++){
+		goal = 2.0 / 200.0 * j;
+		control.set_goal(goal);
 		value = control.update(value);
 		std::cout << time++ << "\t" << goal << "\t" << value << std::endl;
 	}
