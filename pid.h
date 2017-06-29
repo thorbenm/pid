@@ -17,4 +17,5 @@ private:
 	double int_error;
 	double diff_error;
 	double prev_error;
+	bool first_update;
 };

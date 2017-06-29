@@ -4,7 +4,7 @@
 double goal = 1;
 double value = 0;
 
-pid control(.1,.1,.1);
+pid control(.1,.0,.0);
 
 int main(void){
 	control.set_value(value);
