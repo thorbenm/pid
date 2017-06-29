@@ -11,7 +11,7 @@ double pid::update(double input){
 	error = goal - input;
 	int_error += error;
 	diff_error = error - prev_error;
-	value += kprop * error + kint * int_error + kdiff * diff_error;
+	value = kprop * error + kint * int_error + kdiff * diff_error;
 	return value;
 }
 
