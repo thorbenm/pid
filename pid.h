@@ -5,11 +5,11 @@ public:
 	void set_value(double input = 0);
 	void set_goal(double input = 0);
 	double update(double input = 0);
-	pid(double kprop2 = 1, double kint2 = 0, double kdiff2 = 0, double dt2 = 1);
+	pid(double kp2 = 1, double ti2 = 0, double td2 = 0, double dt2 = 1);
 private:
-	double kprop;
-	double kint;
-	double kdiff;
+	double kp;
+	double ti;
+	double td;
 	double dt;
 	double goal;
 	double value;
