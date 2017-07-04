@@ -8,8 +8,8 @@ public:
 	pid(double kp2 = 1, double ti2 = 0, double td2 = 0, double dt2 = 1);
 private:
 	double kp;
-	double ki;
-	double kd;
+	double ti;
+	double td;
 	double dt;
 	double goal;
 	double value;

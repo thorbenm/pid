@@ -1,9 +1,9 @@
 #include "pid.h"
 
-pid::pid(double kp2, double ki2, double kd2, double dt2){
+pid::pid(double kp2, double ti2, double td2, double dt2){
 	kp = kp2;
-	ki  = ki2 ;
-	kd = kd2;
+	ti  = ti2 ;
+	td = td2;
 	dt = dt2;
 	first_update = true;
 }
@@ -16,13 +16,12 @@ double pid::update(double input){
 	}else{
 		diff_error = (error - prev_error) / dt;
 	}
-	if(ki<1e-5){ //if ki == 0
+	if(ti<1e-5){ //if ti == 0
 		value = kp * (error +
-			kd * diff_error);
-	}else{
-		value = kp * (error +
-			int_error / ki +
-			kd * diff_error);
+			td * diff_error);
+	}else{ value = kp * (error +
+			int_error / ti +
+			td * diff_error);
 	}
 	prev_error = error;
 	first_update = false;
