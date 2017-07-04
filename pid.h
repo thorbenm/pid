@@ -1,11 +1,14 @@
 #pragma omp once
+#include <chrono>
+#include <ctime>
+#include <iostream>
 
 class pid{
 public:
 	void set_value(double input = 0);
 	void set_goal(double input = 0);
 	double update(double input = 0);
-	pid(double kp2 = 1, double ti2 = 0, double td2 = 0, double dt2 = 1);
+	pid(double kp2 = 1, double ti2 = 0, double td2 = 0);
 private:
 	double kp;
 	double ti;
@@ -18,4 +21,6 @@ private:
 	double diff_error;
 	double prev_error;
 	bool first_update;
+	std::chrono::time_point<std::chrono::system_clock> time_point;
+	std::chrono::time_point<std::chrono::system_clock> previous_time_point;
 };
