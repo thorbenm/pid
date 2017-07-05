@@ -1,12 +1,12 @@
 #pragma omp once
 #include <chrono>
 #include <ctime>
-#include <iostream>
 
 class pid{
 public:
 	void set_value(double input = 0);
 	void set_goal(double input = 0);
+	double read_goal(void);
 	double update(double input = 0);
 	pid(double kp2 = 1, double ti2 = 0, double td2 = 0);
 private:

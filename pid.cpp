@@ -8,6 +8,7 @@ pid::pid(double kp2, double ti2, double td2){
 }
 
 double pid::update(double input){
+
 	time_point = std::chrono::system_clock::now();
 	error = goal - input;
 	if(first_update){
@@ -17,11 +18,10 @@ double pid::update(double input){
 		std::chrono::duration<double>
 		elapsed_seconds = time_point-previous_time_point;
 		dt = elapsed_seconds.count();
-		std::cerr << std::endl << "dt = " << dt << std::endl; 
-
 		int_error += error * dt;
 		diff_error = (error - prev_error) / dt;
 	}
+
 	if(ti<1e-5){ //if ti == 0
 		value = kp * (error +
 			td * diff_error);
@@ -41,4 +41,8 @@ void pid::set_value(double input){
 
 void pid::set_goal(double input){
 	goal = input;
+}
+
+double pid::read_goal(){
+	return goal;
 }
