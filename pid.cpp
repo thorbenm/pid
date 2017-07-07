@@ -1,9 +1,10 @@
 #include "pid.h"
 
-pid::pid(double kp2, double ti2, double td2){
+pid::pid(double kp2, double ti2, double td2, double offset2){
 	kp = kp2;
 	ti  = ti2;
 	td = td2;
+	offset = offset2;
 	first_update = true;
 }
 
@@ -29,6 +30,7 @@ double pid::update(double input){
 			int_error / ti +
 			td * diff_error);
 	}
+	value += offset;
 	prev_error = error;
 	previous_time_point = time_point;
 	first_update = false;

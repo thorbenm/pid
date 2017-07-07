@@ -8,11 +8,12 @@ public:
 	void set_goal(double input = 0);
 	double read_goal(void);
 	double update(double input = 0);
-	pid(double kp2 = 1, double ti2 = 0, double td2 = 0);
+	pid(double kp2 = 1, double ti2 = 0, double td2 = 0, double offset = 0);
 private:
 	double kp;
 	double ti;
 	double td;
+	double offset;
 	double dt;
 	double goal;
 	double value;
