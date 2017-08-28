@@ -11,8 +11,11 @@ public:
 	pid(double kp2 = 1, double ti2 = 0, double td2 = 0, double offset = 0);
 private:
 	double kp;
-	double ti;
-	double td;
+	double ki;
+	double kd;
+	double k1;
+	double k2;
+	double k3;
 	double offset;
 	double dt;
 	double goal;
@@ -21,6 +24,7 @@ private:
 	double int_error;
 	double diff_error;
 	double prev_error;
+	double prev_prev_error;
 	bool first_update;
 	std::chrono::time_point<std::chrono::system_clock> time_point;
 	std::chrono::time_point<std::chrono::system_clock> previous_time_point;

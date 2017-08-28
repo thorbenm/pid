@@ -1,15 +1,17 @@
 #include "pid.h"
 
-pid::pid(double kp2, double ti2, double td2, double offset2){
+pid::pid(double kp2, double ki2, double kd2, double offset2){
 	kp = kp2;
-	ti  = ti2;
-	td = td2;
+	ki  = ki2;
+	kd = kd2;
 	offset = offset2;
+	k1 = kp + ki + kd;
+	k2 = -kp - 2.0 * kd;
+	k3 = kd;
 	first_update = true;
 }
 
 double pid::update(double input){
-
 	time_point = std::chrono::system_clock::now();
 	error = goal - input;
 	if(first_update){
@@ -23,14 +25,20 @@ double pid::update(double input){
 		diff_error = (error - prev_error) / dt;
 	}
 
-	if(ti<1e-5){ //if ti == 0
-		value = kp * (error +
-			td * diff_error);
-	}else{ value = kp * (error +
-			int_error / ti +
-			td * diff_error);
-	}
-	value += offset;
+//	if(ki<1e-5){ //if ki == 0
+//		value = kp * error +
+//			kd * diff_error
+//			+ offset;
+//	}else{
+		value =  kp * error +
+			ki * int_error +
+			kd * diff_error
+			+ offset;
+//	}
+
+//	value += k1*error + k2*prev_error + k3*prev_prev_error;
+
+	prev_prev_error = prev_error;
 	prev_error = error;
 	previous_time_point = time_point;
 	first_update = false;
