@@ -5,7 +5,7 @@ double goal = 1;
 double value = 0;
 double value_percentage = .1;
 
-pid control(2,.1,0);
+pid control(2,10000,0,0,.0001);
 
 int main(void){
 	control.set_value(value);
